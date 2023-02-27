@@ -25,7 +25,7 @@ export function BarChart({ dataSeries, goal = 0 }: BarChartProps) {
         {dataSeries.map((data) => {
           return (
             <BarContainer key={data.label}>
-              <Bar percentage={data.value / maxValue} />
+              <Bar percentage={data.value / maxValue} value={data.value} />
               <span>{data.label.slice(0, 3)}</span>
             </BarContainer>
           )

@@ -1,7 +1,11 @@
 import styled, { keyframes } from 'styled-components'
 
-interface BarProps {
+interface GoalProps {
   percentage: number
+}
+
+interface BarProps extends GoalProps {
+  value: number
 }
 
 const progress = (percentage: number) => keyframes`
@@ -10,6 +14,15 @@ const progress = (percentage: number) => keyframes`
   }
   100% {
     height: ${`${percentage * 100}%`};
+  }
+`
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 `
 
@@ -56,6 +69,8 @@ export const Bar = styled.div<BarProps>`
   width: 1rem;
   border-radius: 999px;
 
+  position: relative;
+
   background: linear-gradient(#90f7ec, #32ccbc);
 
   animation: ${(props) => progress(props.percentage)} 1s linear forwards;
@@ -63,9 +78,29 @@ export const Bar = styled.div<BarProps>`
   &:hover {
     opacity: 0.8;
   }
+
+  &:hover::before {
+    content: '${(props) => props.value}';
+    height: 1rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: -1.2rem;
+    left: calc(50% - 0.75rem);
+
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    color: ${(props) => props.theme.text.main};
+
+    animation: ${fadeIn} 200ms linear forwards;
+  }
 `
 
-export const Goal = styled.div<BarProps>`
+export const Goal = styled.div<GoalProps>`
   width: 100%;
   height: 3px;
   background-color: ${(props) => props.theme.background.radialBar};
