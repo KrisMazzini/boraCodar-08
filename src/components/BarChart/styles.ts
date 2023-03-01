@@ -89,7 +89,8 @@ export const Bar = styled.div<BarProps>`
 
     position: absolute;
     top: -1.2rem;
-    left: calc(50% - 0.75rem);
+    left: 50%;
+    transform: translateX(-50%);
 
     font-size: 0.75rem;
     font-weight: 700;
