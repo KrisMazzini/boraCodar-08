@@ -103,6 +103,8 @@ export const Bar = styled.div<BarProps>`
 export const Goal = styled.div<GoalProps>`
   width: 100%;
   height: 3px;
+  border-radius: 999px;
+
   background-color: ${(props) => props.theme.background.radialBar};
 
   position: absolute;
